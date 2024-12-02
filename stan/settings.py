@@ -19,13 +19,37 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # adds security tags prevents iframing against clickjacking
+    'django.middleware.security.SecurityMiddleware',            # enhances security by adding headers Strict-Transport-Security,
+                                                                # X-Content-Type-Options, X-XSS-Protection,
+                                                                # redirect HTTP to HTTPS if configured
+
+    # manages session data
+    'django.contrib.sessions.middleware.SessionMiddleware',     # manages session data for request, Enables the use of Django's session framework,
+                                                                # which allows data to be stored across requests (e.g., user login status).
+                                                                # uses cookies or other storage backends to save session data.
+
+    # enhance request processing URL formatting
+    'django.middleware.common.CommonMiddleware',                # adds various utilities for request processing
+                                                                # adding a trailing slash to URLs if APPEND_SLASH is enabled
+                                                                # handling URL rewriting based on settings like PREPEND_WWW
+                                                                # helps enforce consistent URL formatting
+
+    # cross-site redirect protection
+    'django.middleware.csrf.CsrfViewMiddleware',                # Cross-Site Request Forgery (CSRF) protection
+                                                                # adds a CSRF token to forms and checks for its presence on POST requests
+                                                                # prevents malicious websites from making unauthorized requests on behalf of authenticated users
+
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # associates user information with requests
+                                                                # ensures the request.user object is available in views, templates, and other parts of the application.
+                                                                # handles user authentication and login status
+
+    'django.contrib.messages.middleware.MessageMiddleware',     # adds support for one-time notifications
+                                                                # enables the use of the Django messages framework, which allows messages like "Your profile has been updated" to be displayed to users.
+
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',   # protects against clickjacking attacks
+                                                                # adds the X-Frame-Options header to HTTP responses to control whether the website can be embedded in an <iframe> tag
+                                                                # prevents malicious sites from embedding your site and tricking users into performing unintended actions.
 ]
 
 ROOT_URLCONF = 'stan.urls'
