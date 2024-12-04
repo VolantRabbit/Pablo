@@ -1,9 +1,28 @@
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}  <!-- Render the form fields -->
-    <button type="submit">Calculate</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator with Scraper</title>
+</head>
+<body>
+    <h1>Stan plaćanje</h1>
 
-{% if result is not None %}
-    <p>Result: {{ result }}</p>
-{% endif %}
+    {% if scraped_value %}
+        <p>Euro to Dinar: <strong>{{ scraped_value }}</strong></p>
+    {% else %}
+        <p>Unable to fetch the exchange rate.</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result is not None %}
+        <p>Result: <strong>{{ result }}</strong></p>
+    {% endif %}
+
+</body>
+</html>
