@@ -8,20 +8,25 @@
 <body>
     <h1>Stan plaćanje</h1>
 
-    {% if scraped_value %}
-        <p>Euro to Dinar: <strong>{{ scraped_value }}</strong></p>
-    {% else %}
-        <p>Unable to fetch the exchange rate.</p>
-    {% endif %}
-
+    <!-- Form for the calculator -->
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Calculate</button>
+        <button type="submit" name="action" value="add">Add</button>
     </form>
 
-    {% if result is not None %}
-        <p>Result: <strong>{{ result }}</strong></p>
+    <!-- Separate form for the "Show" button -->
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="action" value="show">Show Euro to Dinar Rate</button>
+    </form>
+
+    {% if result %}
+        <p>{{ result }}</p>
+    {% endif %}
+
+    {% if result1 %}
+        <p>{{ result1 }}</p>
     {% endif %}
 
 </body>

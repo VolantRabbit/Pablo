@@ -21,7 +21,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     # adds security tags prevents iframing against clickjacking
     'django.middleware.security.SecurityMiddleware',            # enhances security by adding headers Strict-Transport-Security,
-                                                                # X-Content-Type-Options, X-XSS-Protection,
+                                                                # X-Content-Type-Options - prevent sniff, X-XSS-Protection,
                                                                 # redirect HTTP to HTTPS if configured
 
     # manages session data

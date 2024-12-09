@@ -4,26 +4,29 @@ from .eu_scraper import scrape_euro_to_dinar
 
 def calc(request):
     result = None
+    result1 = None
     scraped_value = None  # Variable to hold the scraped value
 
-    if request.method == 'POST':
-        form = SumForm(request.POST)  # Bind the form to POST data
-        if form.is_valid():
-            num1 = form.cleaned_data['number1']
-            num2 = form.cleaned_data['number2']
-            result = num1 + num2
-        else:
-            result = "Invalid input"
-    else:
-        form = SumForm()  # Create an empty form for GET requests
+    # Initialize the form variable outside of the POST condition
+    form = SumForm()  # Default form initialization for GET requests
 
-    # Call the scraper function
-    scraped_value = scrape_euro_to_dinar()
+    if request.method == 'POST' and 'action' in request.POST:
+        action = request.POST['action']
+        if action == 'add':
+            form = SumForm(request.POST)  # Bind the form to POST data for "Add" action
+            if form.is_valid():
+                num1 = form.cleaned_data['stan_eur']  # Get first number
+                num2 = form.cleaned_data['internet']   # Get second number
+                result1 = num1 + num2  # Perform addition
+            else:
+                result = "Invalid input"  # Invalid input if form is not valid
+        elif action == 'show':
+            scraped_value = scrape_euro_to_dinar()  # Call the scraping function
+            result = f"Eur/Din rate: {scraped_value}"  # Display scraped value
 
-    # Add both the form and scraped value to the context
     return render(request, 'stan_calc/calc.html', {
         'form': form,
         'result': result,
-        'scraped_value': scraped_value
+        'result1': result1,
+        'scraped_value': scraped_value,
     })
-
