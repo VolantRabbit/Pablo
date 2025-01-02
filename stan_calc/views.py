@@ -10,7 +10,7 @@ def calc(request):
     # Initialize the form variable outside of the POST condition
     form = SumForm()  # Default form initialization for GET requests
 
-    if request.method == 'POST' and 'action' in request.POST:
+    if request.method == 'POST' and 'act' in request.POST:
         action = request.POST['action']
         if action == 'add':
             form = SumForm(request.POST)  # Bind the form to POST data for "Add" action

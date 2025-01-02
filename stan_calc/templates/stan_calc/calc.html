@@ -8,7 +8,11 @@
 <body>
     <h1>Stan plaćanje</h1>
 
-    <!-- Form for the calculator -->
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="act" value="show">Show Euro to Dinar Rate</button>
+    </form>
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
@@ -16,10 +20,7 @@
     </form>
 
     <!-- Separate form for the "Show" button -->
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" name="action" value="show">Show Euro to Dinar Rate</button>
-    </form>
+
 
     {% if result %}
         <p>{{ result }}</p>
