@@ -2,33 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator with Scraper</title>
+    <title>Title</title>
 </head>
 <body>
-    <h1>Stan plaćanje</h1>
-
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" name="act" value="show">Show Euro to Dinar Rate</button>
-    </form>
-
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="action" value="add">Add</button>
-    </form>
-
-    <!-- Separate form for the "Show" button -->
-
-
-    {% if result %}
-        <p>{{ result }}</p>
-    {% endif %}
-
-    {% if result1 %}
-        <p>{{ result1 }}</p>
-    {% endif %}
-
+<h1>Stan</h1>
+<form method="post" action="{% url 'calc' %}">
+    {% csrf_token %}
+    <button type="submit">ExRate</button>
+</form>
 </body>
 </html>
