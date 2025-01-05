@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Stan</title>
 </head>
 <body>
 <h1>Stan</h1>
@@ -10,5 +10,10 @@
     {% csrf_token %}
     <button type="submit">ExRate</button>
 </form>
+
+{% if eur_rate %}
+    <h2>EUR Rate: {{ eur_rate|floatformat:2 }}</h2>
+{% endif %}
+
 </body>
 </html>
