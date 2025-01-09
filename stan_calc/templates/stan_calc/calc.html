@@ -5,14 +5,35 @@
     <title>Stan</title>
 </head>
 <body>
-<h1>Stan</h1>
-<form method="post" action="{% url 'calc' %}">
+<h1>Stan Pl</h1>
+
+<!-- Exchange Rate Form -->
+<form method="post" action="{% url 'render_flat' %}">
     {% csrf_token %}
-    <button type="submit">ExRate</button>
+    <button type="submit" name="exrate_btn">ExRate</button>
 </form>
 
+<!-- Display EUR Rate -->
 {% if eur_rate %}
-    <h2>EUR Rate: {{ eur_rate|floatformat:2 }}</h2>
+    <h4>EUR Rate: {{ eur_rate|floatformat:2 }}</h4>
+{% endif %}
+
+<h4>Stan EUR: 190</h4>
+
+<!-- Display the Calculated Stan Cost -->
+{% if stan_cost_din %}
+    <h3>Stan RSD: {{ stan_cost_din }}</h3>
+{% endif %}
+
+<!-- Flat Form to Trigger Calculation -->
+<form method="post" action="{% url 'render_flat' %}">
+    {% csrf_token %}
+    {{ form_payments.as_p }}
+    <button type="submit" name="flat_form_btn">Submit</button>
+</form>
+
+{% if sum_payments %}
+    <h3>Sum: {{ sum_payments }}</h3>
 {% endif %}
 
 </body>
