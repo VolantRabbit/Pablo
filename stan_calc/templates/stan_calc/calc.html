@@ -2,35 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stan</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-<h1>Plaćanje stana</h1>
 
-<!-- Exchange Rate Form -->
-<form method="post" action="{% url 'render_flat' %}">
-    {% csrf_token %}
-    <button type="submit" name="exrate_btn">ExRate</button>
-</form>
+<div class="container">
+    <h1>Plaćanje stana</h1>
 
-<!-- Display EUR Rate -->
-<h4>EUR Rate: {{ eur_rate }}</h4>
+    <!-- Exchange Rate Form -->
+    <div class="form-section">
+        <form method="post" action="{% url 'render_flat' %}">
+            {% csrf_token %}
+            <button type="submit" name="exrate_btn" class="btn">ExRate</button>
+        </form>
+    </div>
 
-<h4>Stan EUR: 190</h4>
+    <!-- Display EUR Rate -->
+    {% if eur_rate %}
+        <div class="rate-display">
+            <h4>EUR Rate: {{ eur_rate }}</h4>
+        </div>
+    {% endif %}
 
-<!-- Flat Form to Trigger Calculation -->
-<form method="post" action="{% url 'render_flat' %}">
-    {% csrf_token %}
-    {{ form_payments.as_p }}
-    <button type="submit" name="flat_form_btn">Submit</button>
-</form>
+    <h4>Stan EUR: 190</h4>
 
-<h3>Stan: {{ stan_cost_din }}</h3>
+    <!-- Flat Form to Trigger Calculation -->
+    <div class="form-section">
+        <form method="post" action="{% url 'render_flat' %}">
+            {% csrf_token %}
+            {{ form_payments.as_p }}
+            <button type="submit" name="flat_form_btn" class="btn">Submit</button>
+        </form>
+    </div>
 
-{% if sum_payments %}
-    <h3>Račune: {{ sum_payments }}</h3>
-    <h3>Ukupno: {{ sum_sum }}</h3>
-{% endif %}
+    <!-- Display Stan Cost -->
+    {% if stan_cost_din %}
+        <div class="result">
+            <h3>Stan: {{ stan_cost_din }}</h3>
+        </div>
+    {% endif %}
+
+    <!-- Display Sum of Payments and Total -->
+    {% if sum_payments %}
+        <div class="result">
+            <h3>Račune: {{ sum_payments }}</h3>
+            <h3>Ukupno: {{ sum_sum }}</h3>
+        </div>
+    {% endif %}
+</div>
 
 </body>
 </html>
