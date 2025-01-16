@@ -5,7 +5,7 @@
     <title>Stan</title>
 </head>
 <body>
-<h1>Stan Pl</h1>
+<h1>Plaćanje stana</h1>
 
 <!-- Exchange Rate Form -->
 <form method="post" action="{% url 'render_flat' %}">
@@ -14,16 +14,9 @@
 </form>
 
 <!-- Display EUR Rate -->
-{% if eur_rate %}
-    <h4>EUR Rate: {{ eur_rate|floatformat:2 }}</h4>
-{% endif %}
+<h4>EUR Rate: {{ eur_rate }}</h4>
 
 <h4>Stan EUR: 190</h4>
-
-<!-- Display the Calculated Stan Cost -->
-{% if stan_cost_din %}
-    <h3>Stan RSD: {{ stan_cost_din }}</h3>
-{% endif %}
 
 <!-- Flat Form to Trigger Calculation -->
 <form method="post" action="{% url 'render_flat' %}">
@@ -32,8 +25,11 @@
     <button type="submit" name="flat_form_btn">Submit</button>
 </form>
 
+<h3>Stan: {{ stan_cost_din }}</h3>
+
 {% if sum_payments %}
-    <h3>Sum: {{ sum_payments }}</h3>
+    <h3>Račune: {{ sum_payments }}</h3>
+    <h3>Ukupno: {{ sum_sum }}</h3>
 {% endif %}
 
 </body>
