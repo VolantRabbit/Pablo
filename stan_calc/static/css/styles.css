@@ -1,4 +1,4 @@
-/* General Layout */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -14,30 +14,29 @@ h1, h3, h4 {
     color: #333;
 }
 
-/* Container for the content */
 .container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    width: 80%;
+    width: 40%;
     max-width: 600px;
 }
 
-/* Form Styling */
-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-button {
+.button {
     padding: 10px 15px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
     transition: background-color 0.3s ease;
 }
 
@@ -45,7 +44,6 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Input Styling */
 input[type="text"], input[type="number"], input[type="submit"] {
     padding: 10px;
     border: 1px solid #ccc;
@@ -53,7 +51,7 @@ input[type="text"], input[type="number"], input[type="submit"] {
     font-size: 16px;
 }
 
-/* Headings */
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
@@ -66,7 +64,6 @@ h4 {
     color: #7f8c8d;
 }
 
-/* Add padding to the body */
 body {
     padding: 20px;
 }

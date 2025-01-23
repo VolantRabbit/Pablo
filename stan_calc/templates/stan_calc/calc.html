@@ -13,10 +13,10 @@
     <h1>Plaćanje stana</h1>
 
     <!-- Exchange Rate Form -->
-    <div class="form-section">
+    <div class="form">
         <form method="post" action="{% url 'render_flat' %}">
             {% csrf_token %}
-            <button type="submit" name="exrate_btn" class="btn">ExRate</button>
+            <button type="submit" name="exrate_btn" class="button">ExRate</button>
         </form>
     </div>
 
@@ -29,12 +29,12 @@
 
     <h4>Stan EUR: 190</h4>
 
-    <!-- Flat Form to Trigger Calculation -->
-    <div class="form-section">
+    <!-- Form Calc -->
+    <div class="form">
         <form method="post" action="{% url 'render_flat' %}">
             {% csrf_token %}
             {{ form_payments.as_p }}
-            <button type="submit" name="flat_form_btn" class="btn">Submit</button>
+            <button type="submit" name="flat_form_btn" class="button">Calculate</button>
         </form>
     </div>
 
