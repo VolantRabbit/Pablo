@@ -23,7 +23,10 @@ def payments(request):
     form = FlatForm()
     sum_payments = None
     sum_sum = None
-    if request.method == 'POST':
+    eur_rate_value = None
+    stan_cost_din = None
+
+    if 'flat_form_btn' in request.POST:
         form = FlatForm(request.POST)
         if form.is_valid():
             sum_payments = (
@@ -33,18 +36,22 @@ def payments(request):
                 form.cleaned_data['household']
             )
             sum_sum = sum_payments + flat_cost(request)
-        else:
-            for field_name in form.errors:
-                form.errors[field_name] = [
-                    error for error in form.errors[field_name]
-                    if error != 'This field is required.'
-                ]
-    return form, sum_payments, sum_sum
+
+    elif 'exrate_btn' in request.POST:
+        eur_rate_value = get_exchange_rate(request)
+        stan_cost_din = eur_rate_value * 190
+
+    return form, sum_payments, sum_sum, eur_rate_value, stan_cost_din
+
 
 def render_flat(request):
-    eur_rate = get_exchange_rate(request)
-    stan_cost_din = flat_cost(request)
-    form_payments, sum_payments, sum_sum = payments(request)
+    form_payments, sum_payments, sum_sum, eur_rate, stan_cost_din = payments(request)
+
+    if eur_rate is None:
+        eur_rate = get_exchange_rate(request)
+
+    if stan_cost_din is None:
+        stan_cost_din = flat_cost(request)
 
     return render(request, 'stan_calc/calc.html', {
         'eur_rate': eur_rate,
@@ -53,6 +60,7 @@ def render_flat(request):
         'sum_payments': sum_payments,
         'sum_sum': sum_sum,
     })
+
 
 
 

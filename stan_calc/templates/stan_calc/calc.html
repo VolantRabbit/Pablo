@@ -13,11 +13,11 @@
     <h1>Plaćanje stana</h1>
 
     <!-- Exchange Rate Form -->
-    <div class="form">
-        <form method="post" action="{% url 'render_flat' %}">
-            {% csrf_token %}
-            <button type="submit" name="exrate_btn" class="button">ExRate</button>
-        </form>
+   <div class="form">
+    <form method="post" action="{% url 'render_flat' %}">
+        {% csrf_token %}
+        <button type="submit" name="exrate_btn" class="button">ExRate</button>
+    </form>
     </div>
 
     <!-- Display EUR Rate -->
