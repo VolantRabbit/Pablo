@@ -40,7 +40,7 @@ def payments(request):
             household = form.cleaned_data['household']
 
             sum_payments = internet + electricity + water + household
-            sum_sum = sum_payments + flat_cost(request)
+            sum_sum = round(sum_payments + flat_cost(request), 2)
 
             if payment and payment.format_updated_at == today_date:
                 payment.total = sum_sum
@@ -73,8 +73,8 @@ def render_flat(request):
         'eur_rate': eur_rate,
         'stan_cost_din': stan_cost_din,
         'form_payments': form_payments,
-        'sum_payments': round(sum_payments, 2),
-        'sum_sum': round(sum_sum, 2),
+        'sum_payments': sum_payments,
+        'sum_sum': sum_sum,
     })
 
 
